@@ -88,4 +88,10 @@ export const useAuthStore = defineStore('auth', () => {
     logout,
     checkAuth
   }
+}, {
+  persist: {
+    key: 'auth-store',
+    storage: localStorage,
+    paths: ['user', 'token']
+  }
 })

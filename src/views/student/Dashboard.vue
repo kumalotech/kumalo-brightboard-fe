@@ -186,12 +186,16 @@ const continueCourse = (courseId) => {
                 </div>
 
                 <div class="mt-4 flex items-center justify-between">
-                  <p class="text-sm text-teal/70">
-                    Next: {{ course.nextLesson }}
-                  </p>
-                  <BaseButton @click="continueCourse(course.id)">
-                    Continue Learning
-                  </BaseButton>
+                  <div>
+                    <p class="text-sm text-teal/70">
+                      Next: {{ course.nextLesson }}
+                    </p>
+                  </div>
+                  <div>
+                    <BaseButton @click="continueCourse(course.id)">
+                      Continue Learning
+                    </BaseButton>
+                  </div>
                 </div>
               </div>
             </div>
@@ -202,7 +206,7 @@ const continueCourse = (courseId) => {
       <!-- Sidebar -->
       <div class="space-y-6">
         <!-- Upcoming Sessions -->
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-lg shadow-sm p-6 mt-[50px]">
           <h2 class="text-lg font-medium text-teal mb-4">Upcoming Sessions</h2>
           <div class="space-y-4">
             <div
