@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { BookOpen, LogIn, Menu, X } from 'lucide-vue-next'
+import brightboardLogo from '../assets/brightboardlogo.svg'
 
 const isMenuOpen = ref(false)
 </script>
@@ -11,8 +12,9 @@ const isMenuOpen = ref(false)
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <BookOpen class="h-8 w-8 text-primary-500" />
-            <span class="ml-2 text-xl font-bold text-teal">BrightBoard</span>
+            <router-link to="/" class="flex items-center">
+              <img :src="brightboardLogo" alt="BrightBoard Logo" class="h-32 w-auto -ml-8" />
+            </router-link>
           </div>
           
           <div class="hidden md:flex items-center space-x-8">

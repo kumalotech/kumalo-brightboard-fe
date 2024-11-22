@@ -1,5 +1,6 @@
 <script setup>
 import { BookOpen, Facebook, Twitter, Instagram, Linkedin, Youtube, X } from 'lucide-vue-next'
+import brightboardLogo from '../assets/brightboardlogo.svg'
 
 const statsSection = [
   { id: 1, name: 'Active Students', value: '10,000+' },
@@ -48,9 +49,10 @@ const socialIcons = {
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="col-span-1">
-          <div class="flex items-center">
-            <BookOpen class="h-8 w-8 text-primary-500" />
-            <span class="ml-2 text-xl font-bold text-teal">BrightBoard</span>
+          <div class="flex items-start">
+            <router-link to="/" class="flex items-center">
+              <img :src="brightboardLogo" alt="BrightBoard Logo" class="h-32 w-auto -ml-8 -mt-10 -mb-6" />
+            </router-link>
           </div>
           <p class="mt-4 text-teal/70 text-sm">
             Transforming education through technology and innovation.

@@ -15,6 +15,7 @@ import {
   UserIcon,
   X
 } from 'lucide-vue-next'
+import brightboardLogo from '../assets/brightboardlogo.svg'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -44,11 +45,10 @@ const logout = () => {
       <div class="fixed inset-y-0 left-0 flex max-w-xs w-full bg-white">
         <div class="flex-1 flex flex-col min-h-0">
           <!-- Sidebar Header -->
-          <div class="flex items-center justify-between h-16 px-4 bg-primary-600">
-            <span class="text-xl font-bold text-white">BrightBoardd</span>
-            <button class="text-white" @click="sidebarOpen = false">
-              <X class="h-6 w-6" />
-            </button>
+          <div class="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
+            <router-link to="/student" class="flex items-center">
+              <img :src="brightboardLogo" alt="BrightBoard Logo" class="h-32 w-auto -ml-8 -mt-10 -mb-9" />
+            </router-link>
           </div>
 
           <!-- Sidebar Navigation -->
@@ -77,9 +77,10 @@ const logout = () => {
     <div class="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0">
       <div class="flex flex-col flex-grow bg-white shadow">
         <!-- Sidebar Header -->
-        <div class="flex items-center h-16 px-4 bg-primary-600">
-          <BookOpen class="h-8 w-8 text-white" />
-          <span class="ml-2 text-xl font-bold text-white">BrightBoard</span>
+        <div class="flex items-center h-16 px-4 bg-white border-b border-gray-200">
+          <router-link to="/student" class="flex items-center">
+            <img :src="brightboardLogo" alt="BrightBoard Logo" class="h-32 w-auto -ml-8 -mt-10 -mb-9" />
+          </router-link>
         </div>
 
         <!-- Sidebar Navigation -->
