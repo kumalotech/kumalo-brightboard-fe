@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import BaseInput from '../../../components/BaseInput.vue'
+import { useNumberInput } from '../../../composables/useNumberInput'
 
 const emit = defineEmits(['submit', 'cancel'])
+
+const { preventInvalidNumberInput } = useNumberInput()
 
 const formData = ref({
   title: '',
@@ -21,8 +24,8 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full p-6">
+  <div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div class="bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full p-8 shadow-xl">
       <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-6">Create New Package</h2>
       
       <form @submit.prevent="handleSubmit" class="space-y-6">
@@ -49,6 +52,8 @@ const handleSubmit = () => {
             label="Price"
             type="number"
             v-model="formData.price"
+            min="0"
+            @keydown="preventInvalidNumberInput"
             required
           />
 

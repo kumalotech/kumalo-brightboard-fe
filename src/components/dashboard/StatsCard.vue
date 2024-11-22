@@ -36,25 +36,12 @@ defineProps({
               {{ title }}
             </dt>
             <dd>
-              <div class="text-lg font-medium text-gray-900 dark:text-white">
+              <div class="text-2xl font-medium text-gray-900 dark:text-white">
                 {{ value }}
               </div>
             </dd>
           </dl>
         </div>
-      </div>
-    </div>
-    <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-      <div class="text-sm">
-        <span
-          :class="[
-            change > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400',
-            'font-medium'
-          ]"
-        >
-          {{ change > 0 ? '+' : '' }}{{ change }}%
-        </span>
-        <span class="text-gray-500 dark:text-gray-400 ml-2">from previous period</span>
       </div>
     </div>
   </div>

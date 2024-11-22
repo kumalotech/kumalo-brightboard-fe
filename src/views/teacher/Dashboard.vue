@@ -5,7 +5,8 @@ import {
   Users, 
   BookOpen, 
   DollarSign, 
-  Star 
+  Star,
+  Wallet
 } from 'lucide-vue-next'
 
 const stats = ref([
@@ -22,10 +23,10 @@ const stats = ref([
     icon: BookOpen
   },
   {
-    title: 'Monthly Revenue',
-    value: '$4,320',
+    title: 'Wallet Balance',
+    value: '4,320',
     change: 15,
-    icon: DollarSign
+    icon: Wallet
   },
   {
     title: 'Average Rating',
@@ -151,10 +152,10 @@ const formatDate = (dateString) => {
             </ul>
           </div>
           <div class="mt-6">
-            <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-500">
+            <router-link to="/teacher/sessions" class="text-sm font-medium text-primary-600 hover:text-primary-500">
               View all sessions
               <span aria-hidden="true"> →</span>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>

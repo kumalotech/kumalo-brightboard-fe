@@ -166,9 +166,11 @@ const startSession = (sessionId) => {
             Manage your upcoming and past teaching sessions
           </p>
         </div>
-        <BaseButton @click="showCreateModal = true">
-          Create New Session
-        </BaseButton>
+        <div>
+          <BaseButton @click="showCreateModal = true">
+            Create New Session
+          </BaseButton>
+        </div>
       </div>
     </div>
 
@@ -187,7 +189,7 @@ const startSession = (sessionId) => {
           </label>
           <select
             v-model="selectedType"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            class="mt-1 block py-1.5 w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
           >
             <option v-for="type in types" :key="type" :value="type">
               {{ type === 'ALL' ? 'All Types' : type }}
@@ -201,7 +203,7 @@ const startSession = (sessionId) => {
           </label>
           <select
             v-model="selectedStatus"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            class="mt-1 block py-1.5 w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
           >
             <option v-for="status in statuses" :key="status" :value="status">
               {{ status === 'ALL' ? 'All Statuses' : status }}
@@ -215,7 +217,7 @@ const startSession = (sessionId) => {
           </label>
           <select
             v-model="dateFilter"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            class="mt-1 block py-1.5 w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
           >
             <option v-for="filter in dateFilters" :key="filter" :value="filter">
               {{ filter.replace('_', ' ').toLowerCase() }}
@@ -298,7 +300,7 @@ const startSession = (sessionId) => {
     </div>
 
     <!-- Create Session Modal -->
-    <div v-if="showCreateModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
+    <div v-if="showCreateModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div class="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full p-6">
         <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-6">Create New Session</h2>
         

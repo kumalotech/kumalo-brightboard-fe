@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import DashboardLayout from '../layouts/DashboardLayout.vue'
 import StudentLayout from '../layouts/StudentLayout.vue'
+import TeacherLayout from '../layouts/TeacherLayout.vue'
 
 // Public Pages
 import Home from '../views/Home.vue'
@@ -29,6 +30,8 @@ import TeacherDashboard from '../views/teacher/Dashboard.vue'
 import TeacherPackages from '../views/teacher/Packages.vue'
 import TeacherSessions from '../views/teacher/Sessions.vue'
 import TeacherRevenue from '../views/teacher/Revenue.vue'
+import TeacherNotifications from '../views/teacher/TeacherNotifications.vue'
+import TeacherProfile from '../views/teacher/TeacherProfile.vue'
 
 // Student Pages
 import StudentDashboard from '../views/student/Dashboard.vue'
@@ -103,13 +106,15 @@ const routes = [
   // Teacher Routes
   {
     path: '/teacher',
-    component: DashboardLayout,
+    component: TeacherLayout,
     meta: { requiresAuth: true, role: 'TEACHER' },
     children: [
       { path: '', component: TeacherDashboard },
       { path: 'packages', component: TeacherPackages },
       { path: 'sessions', component: TeacherSessions },
-      { path: 'revenue', component: TeacherRevenue }
+      { path: 'revenue', component: TeacherRevenue },
+      { path: 'notifications', component: TeacherNotifications },
+      { path: 'profile', component: TeacherProfile }
     ]
   },
   // Student Routes
