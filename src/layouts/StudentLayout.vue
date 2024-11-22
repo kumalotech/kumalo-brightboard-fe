@@ -45,7 +45,7 @@ const logout = () => {
         <div class="flex-1 flex flex-col min-h-0">
           <!-- Sidebar Header -->
           <div class="flex items-center justify-between h-16 px-4 bg-primary-600">
-            <span class="text-xl font-bold text-white">BrightBoard</span>
+            <span class="text-xl font-bold text-white">BrightBoardd</span>
             <button class="text-white" @click="sidebarOpen = false">
               <X class="h-6 w-6" />
             </button>
@@ -78,7 +78,8 @@ const logout = () => {
       <div class="flex flex-col flex-grow bg-white shadow">
         <!-- Sidebar Header -->
         <div class="flex items-center h-16 px-4 bg-primary-600">
-          <span class="text-xl font-bold text-white">BrightBoard</span>
+          <BookOpen class="h-8 w-8 text-white" />
+          <span class="ml-2 text-xl font-bold text-white">BrightBoard</span>
         </div>
 
         <!-- Sidebar Navigation -->

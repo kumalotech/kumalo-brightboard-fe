@@ -9,7 +9,9 @@ import {
   Calendar,
   MapPin,
   Shield,
-  Camera
+  Camera,
+  Lock,
+  XIcon
 } from 'lucide-vue-next'
 
 const userProfile = ref({
@@ -88,21 +90,32 @@ const handleAvatarUpload = (event) => {
           </div>
         </div>
       </div>
-      <div class="pt-16 pb-6 px-8">
-        <h1 class="text-2xl font-bold text-teal">
-          {{ userProfile.firstName }} {{ userProfile.lastName }}
-        </h1>
-        <p class="mt-1 text-sm text-teal/70">
-          {{ userProfile.bio }}
-        </p>
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="pt-16 pb-6 px-8">
+          <h1 class="text-2xl font-bold text-teal">
+            {{ userProfile.firstName }} {{ userProfile.lastName }}
+          </h1>
+          <p class="mt-1 text-sm text-teal/70">
+            {{ userProfile.bio }}
+          </p>
+        </div>
+        <div class="px-8 pb-6 md:pb-0 md:flex md:items-center">
+          <BaseButton
+            variant="secondary"
+            @click="showChangePassword = true"
+          >
+            <Lock class="h-4 w-4 mr-2" />
+            Change Password
+          </BaseButton>
+        </div>
       </div>
     </div>
 
     <!-- Personal Information -->
     <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
       <h2 class="text-lg font-medium text-teal mb-6">Personal Information</h2>
-      <form @submit.prevent="updateProfile" class="space-y-6">
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <form @submit.prevent="updateProfile" class="space-y-6" autocomplete="off">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <BaseInput
             label="First Name"
             v-model="userProfile.firstName"
@@ -113,24 +126,21 @@ const handleAvatarUpload = (event) => {
             v-model="userProfile.lastName"
             :icon="User"
           />
-        </div>
-
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <BaseInput
             label="Email"
             type="email"
             v-model="userProfile.email"
             :icon="Mail"
           />
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <BaseInput
             label="Phone"
             type="tel"
             v-model="userProfile.phone"
             :icon="Phone"
           />
-        </div>
-
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <BaseInput
             label="Date of Birth"
             type="date"
@@ -144,7 +154,7 @@ const handleAvatarUpload = (event) => {
           />
         </div>
 
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <BaseInput
             label="Address"
             v-model="userProfile.address"
@@ -176,30 +186,21 @@ const handleAvatarUpload = (event) => {
       </form>
     </div>
 
-    <!-- Change Password -->
-    <div class="bg-white rounded-lg shadow-sm p-6">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h2 class="text-lg font-medium text-teal">Password</h2>
-          <p class="text-sm text-teal/70">
-            Update your password to keep your account secure
-          </p>
-        </div>
-        <BaseButton
-          variant="secondary"
-          @click="showChangePassword = true"
-        >
-          Change Password
-        </BaseButton>
-      </div>
-    </div>
-
     <!-- Change Password Modal -->
-    <div v-if="showChangePassword" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
-      <div class="bg-white rounded-lg max-w-md w-full p-6">
-        <h2 class="text-lg font-medium text-teal mb-6">Change Password</h2>
+    <div v-if="showChangePassword" class="fixed inset-0 bg-black/25 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-2xl max-w-md w-full p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-semibold text-gray-900">Change Password</h2>
+          <button
+            @click="showChangePassword = false"
+            class="text-gray-400 hover:text-gray-500"
+          >
+            <span class="sr-only">Close</span>
+            <XIcon class="h-6 w-6" />
+          </button>
+        </div>
         
-        <form @submit.prevent="changePassword" class="space-y-6">
+        <form @submit.prevent="changePassword" class="space-y-4">
           <BaseInput
             label="Current Password"
             type="password"
@@ -221,20 +222,20 @@ const handleAvatarUpload = (event) => {
             required
           />
 
-          <div class="flex justify-end space-x-3">
-            <button
+          <div class="flex justify-end space-x-3 mt-6">
+            <BaseButton
               type="button"
+              variant="secondary"
               @click="showChangePassword = false"
-              class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-teal bg-white hover:bg-gray-50"
             >
               Cancel
-            </button>
-            <button
+            </BaseButton>
+            <BaseButton
               type="submit"
-              class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
+              variant="primary"
             >
               Change Password
-            </button>
+            </BaseButton>
           </div>
         </form>
       </div>

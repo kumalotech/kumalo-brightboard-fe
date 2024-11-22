@@ -6,7 +6,8 @@ import {
   Award,
   AlertCircle,
   Check,
-  X
+  X,
+  Trash2
 } from 'lucide-vue-next'
 import BaseButton from '../../components/BaseButton.vue'
 
@@ -95,16 +96,22 @@ const clearAllNotifications = () => {
       </div>
       <div class="flex space-x-3">
         <BaseButton
-          variant="secondary"
+          variant="primary"
           @click="markAllAsRead"
+          class="flex items-center gap-2 bg-teal text-teal-700 hover:bg-teal/80 
+                 transition-colors border-none shadow-sm whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
-          Mark all as read
+          <Check class="w-4 h-4 flex-shrink-0" />
+          <span>Mark all as read</span>
         </BaseButton>
         <BaseButton
           variant="secondary"
           @click="clearAllNotifications"
+          class="flex items-center gap-2 bg-red-50 text-red-600 hover:bg-red-200 
+                 transition-colors border-none shadow-sm whitespace-nowrap"
         >
-          Clear all
+          <Trash2 class="w-4 h-4 flex-shrink-0" />
+          <span>Clear all</span>
         </BaseButton>
       </div>
     </div>

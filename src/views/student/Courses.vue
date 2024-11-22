@@ -81,10 +81,10 @@ const priceRanges = [
 
 const isInPriceRange = (price, range) => {
   switch (range) {
-    case 'Under $200': return price < 200
-    case '$200 - $300': return price >= 200 && price <= 300
-    case '$300 - $400': return price > 300 && price <= 400
-    case 'Over $400': return price > 400
+    case 'Under UGX 200': return price < 200
+    case 'UGX 200 - UGX 300': return price >= 200 && price <= 300
+    case 'UGX 300 - UGX 400': return price > 300 && price <= 400
+    case 'Over UGX 400': return price > 400
     default: return true
   }
 }
@@ -211,13 +211,13 @@ const viewCourseDetails = (courseId) => {
     </div>
 
     <!-- Course Grid -->
-    <div class="grid gap-6 grid-cols-1 lg:grid-cols-2">
+    <div class="grid gap-6 grid-cols-1">
       <div
         v-for="course in filteredCourses"
         :key="course.id"
         class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200"
       >
-        <div class="flex h-48 md:h-64">
+        <div class="flex h-48 md:h-48">
           <div class="w-1/3">
             <img
               :src="course.image"
@@ -245,19 +245,23 @@ const viewCourseDetails = (courseId) => {
 
             <div class="mt-auto">
               <div class="flex items-center justify-between mb-4">
-                <div class="text-sm text-teal/70">
-                  <div>{{ course.duration }}</div>
-                  <div>{{ course.level }}</div>
+                <div>
+                  <div class="text-sm text-teal/70">
+                    <div>{{ course.duration }}</div>
+                    <div>{{ course.level }}</div>
+                  </div>
+                  <div class="text-xl font-bold text-primary-600">UGX {{ course.price }}</div>
                 </div>
-                <div class="text-xl font-bold text-primary-600">${{ course.price }}</div>
+                <div>
+                  <BaseButton
+                    @click="viewCourseDetails(course.id)"
+                    class="w-full bg-primary-600 text-white hover:bg-primary-700"
+                  >
+                    View Course
+                  </BaseButton>
+                </div>
               </div>
 
-              <BaseButton
-                @click="viewCourseDetails(course.id)"
-                class="w-full"
-              >
-                View Course
-              </BaseButton>
             </div>
           </div>
         </div>

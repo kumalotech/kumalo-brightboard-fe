@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import BaseInput from '../../components/BaseInput.vue'
 import BaseButton from '../../components/BaseButton.vue'
+import { useNumberInput } from '../../composables/useNumberInput'
 import { 
   Wallet,
   Plus,
@@ -14,7 +15,9 @@ import {
 const wallet = ref({
   balance: 1250.00,
   currency: 'USD'
-})
+  })
+
+const { preventInvalidNumberInput } = useNumberInput()
 
 const transactions = ref([
   {
@@ -85,8 +88,9 @@ const formatDate = (dateString) => {
 const formatAmount = (amount) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: wallet.value.currency,
-    signDisplay: 'always'
+    currency: 'UGX',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
   }).format(amount)
 }
 
@@ -133,13 +137,15 @@ const handleTopUp = () => {
           </div>
           <div>
             <p class="text-sm text-teal/70">Available Balance</p>
-            <p class="text-2xl font-bold text-teal">{{ formatAmount(wallet.balance) }}</p>
+            <p class="text-3xl font-bold text-teal">{{ formatAmount(wallet.balance) }}</p>
           </div>
         </div>
-        <BaseButton @click="showTopUpModal = true">
-          <Plus class="h-4 w-4 mr-2" />
-          Top Up Wallet
-        </BaseButton>
+        <div>
+          <BaseButton @click="showTopUpModal = true">
+            <Plus class="h-4 w-4 mr-2" />
+            Top Up Wallet
+          </BaseButton>
+        </div>
       </div>
     </div>
 
@@ -160,7 +166,7 @@ const handleTopUp = () => {
             </label>
             <select
               v-model="selectedType"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              class="mt-1 block w-full rounded-md border-gray-300 py-1.5 shadow-sm focus:border-primary-500 focus:ring-primary-500"
             >
               <option v-for="type in types" :key="type" :value="type">
                 {{ type === 'ALL' ? 'All Types' : type }}
@@ -174,7 +180,7 @@ const handleTopUp = () => {
             </label>
             <select
               v-model="dateRange"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              class="mt-1 block w-full rounded-md border-gray-300 py-1.5 shadow-sm focus:border-primary-500 focus:ring-primary-500"
             >
               <option v-for="range in dateRanges" :key="range" :value="range">
                 {{ range.replace('_', ' ').toLowerCase() }}
@@ -237,35 +243,58 @@ const handleTopUp = () => {
     </div>
 
     <!-- Top Up Modal -->
-    <div v-if="showTopUpModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
-      <div class="bg-white rounded-lg max-w-md w-full p-6">
-        <h2 class="text-lg font-medium text-teal mb-6">Top Up Wallet</h2>
-        
-        <form @submit.prevent="handleTopUp" class="space-y-6">
-          <BaseInput
-            label="Amount"
-            type="number"
-            v-model="topUpAmount"
-            placeholder="Enter amount to top up"
-            required
-          />
-
-          <div class="flex justify-end space-x-3">
-            <button
-              type="button"
-              @click="showTopUpModal = false"
-              class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-teal bg-white hover:bg-gray-50"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
-            >
-              Top Up
-            </button>
+    <div v-if="showTopUpModal" class="fixed inset-0 z-50 overflow-y-auto">
+      <!-- Overlay with blur -->
+      <div class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm transition-opacity"></div>
+      
+      <div class="flex min-h-full items-center justify-center p-4">
+        <div class="relative transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all w-full max-w-md p-8">
+          <!-- Header -->
+          <div class="mb-8">
+            <h2 class="text-xl font-semibold text-teal">Top Up Wallet</h2>
+            <p class="mt-2 text-sm text-teal/60">Enter the amount you want to add to your wallet</p>
           </div>
-        </form>
+          
+          <form @submit.prevent="handleTopUp" class="space-y-8">
+            <BaseInput
+              label="Amount"
+              type="number"
+              v-model="topUpAmount"
+              placeholder="0.00"
+              min="0"
+              @keydown="preventInvalidNumberInput"
+              required
+            />
+
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-4">
+              <button
+                type="button"
+                @click="showTopUpModal = false"
+                class="px-5 py-2.5 border border-gray-200 text-sm font-medium rounded-lg text-teal hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-5 py-2.5 text-sm font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-sm"
+              >
+                Confirm Top Up
+              </button>
+            </div>
+          </form>
+
+          <!-- Close button -->
+          <button 
+            @click="showTopUpModal = false"
+            class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 transition-colors"
+          >
+            <span class="sr-only">Close</span>
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
