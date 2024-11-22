@@ -5,15 +5,17 @@ import { useAuthStore } from '../stores/auth'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import {
   LayoutDashboard,
-  BookOpen,
-  Calendar,
-  DollarSign,
+  GraduationCap,
+  Users,
+  Settings,
   Bell,
   User,
   LogOut,
   Menu as MenuIcon,
   X,
-  MessageSquare
+  MessageSquare,
+  BookOpen,
+  Wallet
 } from 'lucide-vue-next'
 
 const authStore = useAuthStore()
@@ -21,12 +23,13 @@ const router = useRouter()
 const sidebarOpen = ref(false)
 
 const navigation = [
-  { name: 'Dashboard', href: '/teacher', icon: LayoutDashboard },
-  { name: 'Packages', href: '/teacher/packages', icon: BookOpen },
-  { name: 'Sessions', href: '/teacher/sessions', icon: Calendar },
-  { name: 'Revenue', href: '/teacher/revenue', icon: DollarSign },
-  { name: 'Notifications', href: '/teacher/notifications', icon: Bell },
-  { name: 'Profile', href: '/teacher/profile', icon: User }
+  { name: 'Dashboard', href: '/institution', icon: LayoutDashboard },
+  { name: 'Revenue', href: '/institution/revenue', icon: Wallet },
+  { name: 'Teachers', href: '/institution/teachers', icon: GraduationCap },
+  { name: 'Students', href: '/institution/students', icon: Users },
+  { name: 'Settings', href: '/institution/settings', icon: Settings },
+  { name: 'Notifications', href: '/institution/notifications', icon: Bell },
+  { name: 'Profile', href: '/institution/profile', icon: User }
 ]
 
 const logout = () => {
@@ -111,7 +114,7 @@ const logout = () => {
           </button>
 
           <div class="flex items-center space-x-4 ml-auto">
-            <router-link to="/teacher/notifications" class="flex items-center text-teal hover:text-primary-600">
+            <router-link to="/institution/notifications" class="flex items-center text-teal hover:text-primary-600">
               <Bell class="h-6 w-6" />
             </router-link>
             <div class="relative inline-block text-left">

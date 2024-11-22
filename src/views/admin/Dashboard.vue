@@ -5,35 +5,38 @@ import {
   Users, 
   BookOpen, 
   DollarSign, 
-  TrendingUp 
+  TrendingUp,
+  Building,
+  Book,
+  User,
 } from 'lucide-vue-next'
 import RevenueChart from '../../components/dashboard/RevenueChart.vue'
 import RecentActivities from '../../components/dashboard/RecentActivities.vue'
 
 const stats = ref([
   {
-    title: 'Total Users',
+    title: 'Total Institutions',
     value: '24,500',
     change: 12,
+    icon: Building
+  },
+  {
+    title: 'Total Teachers',
+    value: '1,245',
+    change: 8,
+    icon: Users
+  },
+  {
+    title: 'Total Students',
+    value: '1,245',
+    change: 15,
     icon: Users
   },
   {
     title: 'Active Courses',
-    value: '1,245',
-    change: 8,
-    icon: BookOpen
-  },
-  {
-    title: 'Monthly Revenue',
-    value: '$84,320',
-    change: 15,
-    icon: DollarSign
-  },
-  {
-    title: 'Student Growth',
     value: '18%',
     change: 5,
-    icon: TrendingUp
+    icon: Book
   }
 ])
 </script>
@@ -54,9 +57,22 @@ const stats = ref([
     </div>
 
     <!-- Charts and Recent Activities -->
-    <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <RevenueChart />
-      <RecentActivities />
+    <div class="mt-8 grid grid-cols-12 gap-6">
+      <div class="col-span-8">
+        <RevenueChart />
+      </div>
+      <div class="col-span-4">
+        <div class="p-4 bg-white rounded-lg shadow mb-4 flex items-center">
+          <DollarSign class="h-6 w-6 mr-4" />
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">Revenue Balance</h2>
+            <p class="text-2xl font-bold">UGX 3,000,000</p>
+          </div>
+        </div>
+        <div class="mt-8">
+          <RecentActivities />
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -5,6 +5,7 @@ import {
   Users, 
   GraduationCap, 
   BookOpen,
+  Wallet,
   TrendingUp 
 } from 'lucide-vue-next'
 
@@ -28,10 +29,10 @@ const stats = ref([
     icon: BookOpen
   },
   {
-    title: 'Completion Rate',
-    value: '92%',
+    title: 'Wallet Balance',
+    value: 'UGX 92,000',
     change: 3,
-    icon: TrendingUp
+    icon: Wallet
   }
 ])
 

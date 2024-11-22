@@ -26,22 +26,6 @@ const activities = ref([
     time: '1 hour ago',
     icon: '👨‍🏫'
   },
-  {
-    id: 4,
-    user: 'Emily Brown',
-    action: 'earned certificate in',
-    target: 'UI/UX Design',
-    time: '2 hours ago',
-    icon: '🏆'
-  },
-  {
-    id: 5,
-    user: 'David Wilson',
-    action: 'joined as',
-    target: 'new instructor',
-    time: '3 hours ago',
-    icon: '✨'
-  }
 ])
 </script>
 

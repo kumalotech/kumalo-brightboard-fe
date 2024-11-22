@@ -67,7 +67,7 @@ const chartOptions = ref({
 <template>
   <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
     <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Revenue Overview</h2>
-    <div class="h-80">
+    <div class="h-96">
       <Line
         :data="chartData"
         :options="chartOptions"

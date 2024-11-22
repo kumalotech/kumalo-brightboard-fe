@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import DashboardLayout from '../layouts/DashboardLayout.vue'
+import AdminLayout from '../layouts/AdminLayout.vue'
 import StudentLayout from '../layouts/StudentLayout.vue'
 import TeacherLayout from '../layouts/TeacherLayout.vue'
+import InstitutionLayout from '../layouts/InstitutionLayout.vue'
 
 // Public Pages
 import Home from '../views/Home.vue'
@@ -18,12 +19,17 @@ import AdminDashboard from '../views/admin/Dashboard.vue'
 import AdminUsers from '../views/admin/Users.vue'
 import AdminRevenue from '../views/admin/Revenue.vue'
 import AdminSettings from '../views/admin/Settings.vue'
+import AdminNotifications from '../views/admin/AdminNotifications.vue'
+import AdminProfile from '../views/admin/AdminProfile.vue'
 
 // Institution Pages
 import InstitutionDashboard from '../views/institution/Dashboard.vue'
 import InstitutionTeachers from '../views/institution/Teachers.vue'
 import InstitutionStudents from '../views/institution/Students.vue'
 import InstitutionSettings from '../views/institution/Settings.vue'
+import InstitutionRevenue from '../views/institution/Revenue.vue'
+import InstitutionProfile from '../views/institution/InstitutionProfile.vue'
+import InstitutionNotifications from '../views/institution/InstitutionNotifications.vue'
 
 // Teacher Pages
 import TeacherDashboard from '../views/teacher/Dashboard.vue'
@@ -32,7 +38,6 @@ import TeacherSessions from '../views/teacher/Sessions.vue'
 import TeacherRevenue from '../views/teacher/Revenue.vue'
 import TeacherNotifications from '../views/teacher/TeacherNotifications.vue'
 import TeacherProfile from '../views/teacher/TeacherProfile.vue'
-
 // Student Pages
 import StudentDashboard from '../views/student/Dashboard.vue'
 import StudentLearn from '../views/student/Learn.vue'
@@ -82,25 +87,30 @@ const routes = [
   // Admin Routes
   {
     path: '/admin',
-    component: DashboardLayout,
+    component: AdminLayout,
     meta: { requiresAuth: true, role: 'ADMIN' },
     children: [
       { path: '', component: AdminDashboard },
       { path: 'users', component: AdminUsers },
       { path: 'revenue', component: AdminRevenue },
-      { path: 'settings', component: AdminSettings }
+      { path: 'settings', component: AdminSettings },
+      { path: 'notifications', component: AdminNotifications },
+      { path: 'profile', component: AdminProfile }
     ]
   },
   // Institution Routes
   {
     path: '/institution',
-    component: DashboardLayout,
+    component: InstitutionLayout,
     meta: { requiresAuth: true, role: 'INSTITUTION' },
     children: [
       { path: '', component: InstitutionDashboard },
+      { path: 'revenue', component: InstitutionRevenue },
       { path: 'teachers', component: InstitutionTeachers },
       { path: 'students', component: InstitutionStudents },
-      { path: 'settings', component: InstitutionSettings }
+      { path: 'settings', component: InstitutionSettings },
+      { path: 'profile', component: InstitutionProfile },
+      { path: 'notifications', component: InstitutionNotifications }
     ]
   },
   // Teacher Routes
